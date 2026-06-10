@@ -40,7 +40,14 @@ function TaskCard({ task, deleteTask, toggleTask, updateTask }) {
  
 
   return (
-    <div className="task-card">
+      <div   className={`task-card ${
+        !task.completed &&
+        task.due_date &&
+        new Date(task.due_date) < new Date()
+          ? "overdue"
+          : ""
+      }`}>
+          
 
       <input
         type="checkbox"

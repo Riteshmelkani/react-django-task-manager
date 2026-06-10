@@ -129,3 +129,15 @@ input[type="text"]{
   color: gray;
 }
 
+.empty-state{
+  background:white;
+  padding:30px;
+  text-align:center;
+  border-radius:12px;
+  margin-top:20px;
+}
+
+.overdue {
+  border: 2px solid #ef4444;
+  background-color: #fef2f2;
+}

@@ -92,7 +92,7 @@ function App() {
 
       <div className="top-section">
         <TaskForm addTask={addTask}/>
-        <Stats />
+        <Stats tasks={tasks}/>
       </div>
 
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
