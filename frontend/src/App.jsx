@@ -11,6 +11,7 @@ import TaskList from "./components/TaskList";
 
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
   const [tasks, setTasks] = useState([]);
     useEffect(() => {
@@ -67,11 +68,24 @@ function App() {
   };
 
   const filteredTasks = tasks.filter((task) => {
-    if (filter === "active") return !task.completed;
-    if (filter === "completed") return task.completed;
-    return true;
+
+    const matchesSearch =
+      task.title.toLowerCase().includes(
+        searchTerm.toLowerCase()
+      );
+
+    if (filter === "active") {
+      return !task.completed && matchesSearch;
+    }
+
+    if (filter === "completed") {
+      return task.completed && matchesSearch;
+    }
+
+    return matchesSearch;
   });
 
+  
   return (
     <div className="container">
       <h1 className="app-title">Task Manager</h1>
@@ -81,7 +95,7 @@ function App() {
         <Stats />
       </div>
 
-      <SearchBar />
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
 
       <FilterBar filter={filter} setFilter={setFilter}/>
 
