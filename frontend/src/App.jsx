@@ -34,6 +34,19 @@ function App() {
     }
   };
 
+  const toggleTask = async (task) => {
+    try {
+      await API.put(`/tasks/${task.id}/`, {
+        ...task,
+        completed: !task.completed,
+      });
+
+      fetchTasks();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const addTask = async (taskData) => {
     try {
       await API.post("/tasks/", taskData);
@@ -56,7 +69,7 @@ function App() {
 
       <FilterBar />
 
-      <TaskList tasks={tasks}  deleteTask={deleteTask}/>
+      <TaskList tasks={tasks}  deleteTask={deleteTask}  toggleTask={toggleTask}/>
     </div>
   );
 }

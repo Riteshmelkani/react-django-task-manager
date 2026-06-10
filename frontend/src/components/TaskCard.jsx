@@ -1,4 +1,4 @@
-function TaskCard({ task, deleteTask }) {
+function TaskCard({ task, deleteTask, toggleTask }) {
 
   const handleDelete = () => {
     const confirmDelete = window.confirm(
@@ -12,7 +12,16 @@ function TaskCard({ task, deleteTask }) {
 
   return (
     <div className="task-card">
-      <h3>{task.title}</h3>
+
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() => toggleTask(task)}
+      />
+
+      <h3 className={task.completed ? "completed" : ""}>
+        {task.title}
+      </h3>
 
       <p>{task.description}</p>
 
