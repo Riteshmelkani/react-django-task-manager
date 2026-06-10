@@ -25,6 +25,15 @@ function App() {
     }
   };
 
+  const deleteTask = async (id) => {
+    try {
+      await API.delete(`/tasks/${id}/`);
+      fetchTasks();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const addTask = async (taskData) => {
     try {
       await API.post("/tasks/", taskData);
@@ -47,7 +56,7 @@ function App() {
 
       <FilterBar />
 
-      <TaskList tasks={tasks}/>
+      <TaskList tasks={tasks}  deleteTask={deleteTask}/>
     </div>
   );
 }
