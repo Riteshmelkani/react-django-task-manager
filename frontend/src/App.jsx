@@ -11,6 +11,7 @@ import TaskList from "./components/TaskList";
 
 
 function App() {
+  const [filter, setFilter] = useState("all");
   const [tasks, setTasks] = useState([]);
     useEffect(() => {
     fetchTasks();
@@ -65,6 +66,12 @@ function App() {
     }
   };
 
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "active") return !task.completed;
+    if (filter === "completed") return task.completed;
+    return true;
+  });
+
   return (
     <div className="container">
       <h1 className="app-title">Task Manager</h1>
@@ -76,9 +83,9 @@ function App() {
 
       <SearchBar />
 
-      <FilterBar />
+      <FilterBar filter={filter} setFilter={setFilter}/>
 
-      <TaskList tasks={tasks}  deleteTask={deleteTask}  toggleTask={toggleTask} updateTask={updateTask}/>
+      <TaskList tasks={filteredTasks}  deleteTask={deleteTask}  toggleTask={toggleTask} updateTask={updateTask}/>
     </div>
   );
 }
