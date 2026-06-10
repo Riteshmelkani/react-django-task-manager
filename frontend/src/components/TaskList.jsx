@@ -1,8 +1,10 @@
+import TaskCard from "./TaskCard";
+
 function TaskList({
   tasks,
   deleteTask,
   toggleTask,
-  updateTask
+  updateTask,
 }) {
 
   if (tasks.length === 0) {
@@ -27,3 +29,5 @@ function TaskList({
     </div>
   );
 }
+
+export default TaskList;

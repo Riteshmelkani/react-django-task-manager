@@ -12,12 +12,12 @@ function Stats({ tasks }) {
     <div className="stats-card">
       <h2>Task Summary</h2>
 
-      <div className="stat-box">
+      <div className="stat-box active-box">
         <h3>{activeTasks}</h3>
         <p>Active</p>
       </div>
 
-      <div className="stat-box">
+      <div className="stat-box completed-box">
         <h3>{completedTasks}</h3>
         <p>Completed</p>
       </div>

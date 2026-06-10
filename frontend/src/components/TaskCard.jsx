@@ -48,18 +48,25 @@ function TaskCard({ task, deleteTask, toggleTask, updateTask }) {
           : ""
       }`}>
           
+      <div classname="task-header">
+        <input
+          type="checkbox"
+          checked={task.completed}
+          onChange={() => toggleTask(task)}
+        />
 
-      <input
-        type="checkbox"
-        checked={task.completed}
-        onChange={() => toggleTask(task)}
-      />
-
-      <h3 className={task.completed ? "completed" : ""}>
-        {task.title}
-      </h3>
+        <h3 className={task.completed ? "completed" : ""}>
+          {task.title}
+        </h3>
+      </div>
 
       <p>{task.description}</p>
+
+      {task.due_date && (
+        <small>
+          Due: {task.due_date}
+        </small>
+      )}
 
       <div className="task-actions">
         <button onClick={handleEdit}>Edit</button>
