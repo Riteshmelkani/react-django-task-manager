@@ -1,6 +1,6 @@
 import TaskCard from "./TaskCard";
 
-function TaskList({ tasks, deleteTask, toggleTask }) {
+function TaskList({ tasks, deleteTask, toggleTask, updateTask}) {
   return (
     <div>
       {tasks.map((task) => (
@@ -9,6 +9,7 @@ function TaskList({ tasks, deleteTask, toggleTask }) {
           task={task}
           deleteTask={deleteTask}
           toggleTask={toggleTask}
+          updateTask={updateTask}
         />
       ))}
     </div>

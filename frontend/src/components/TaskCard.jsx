@@ -1,4 +1,4 @@
-function TaskCard({ task, deleteTask, toggleTask }) {
+function TaskCard({ task, deleteTask, toggleTask, updateTask }) {
 
   const handleDelete = () => {
     const confirmDelete = window.confirm(
@@ -9,6 +9,35 @@ function TaskCard({ task, deleteTask, toggleTask }) {
       deleteTask(task.id);
     }
   };
+
+  const handleEdit = async () => {
+    const newTitle = prompt("Edit title", task.title);
+
+    if (newTitle === null) return;
+
+    const newDescription = prompt(
+      "Edit description",
+      task.description
+    );
+
+    if (newDescription === null) return;
+
+    const newDueDate = prompt(
+      "Edit due date (YYYY-MM-DD)",
+      task.due_date || ""
+    );
+
+    const updatedTask = {
+      ...task,
+      title: newTitle,
+      description: newDescription,
+      due_date: newDueDate,
+    };
+
+    updateTask(updatedTask);
+  };
+
+ 
 
   return (
     <div className="task-card">
@@ -26,7 +55,7 @@ function TaskCard({ task, deleteTask, toggleTask }) {
       <p>{task.description}</p>
 
       <div className="task-actions">
-        <button>Edit</button>
+        <button onClick={handleEdit}>Edit</button>
 
         <button onClick={handleDelete}>
           Delete

@@ -47,6 +47,15 @@ function App() {
     }
   };
 
+  const updateTask = async (updatedTask) => {
+    try {
+      await API.put(`/tasks/${updatedTask.id}/`, updatedTask);
+      fetchTasks();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const addTask = async (taskData) => {
     try {
       await API.post("/tasks/", taskData);
@@ -69,7 +78,7 @@ function App() {
 
       <FilterBar />
 
-      <TaskList tasks={tasks}  deleteTask={deleteTask}  toggleTask={toggleTask}/>
+      <TaskList tasks={tasks}  deleteTask={deleteTask}  toggleTask={toggleTask} updateTask={updateTask}/>
     </div>
   );
 }
