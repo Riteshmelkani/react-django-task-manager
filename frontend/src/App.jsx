@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import API from "./services/api";
+
 import "./App.css";
 
 import TaskForm from "./components/TaskForm";
@@ -6,13 +9,37 @@ import SearchBar from "./components/SearchBar";
 import FilterBar from "./components/FilterBar";
 import TaskList from "./components/TaskList";
 
+
 function App() {
+  const [tasks, setTasks] = useState([]);
+    useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await API.get("/tasks/");
+      setTasks(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addTask = async (taskData) => {
+    try {
+      await API.post("/tasks/", taskData);
+      fetchTasks();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="container">
       <h1 className="app-title">Task Manager</h1>
 
       <div className="top-section">
-        <TaskForm />
+        <TaskForm addTask={addTask}/>
         <Stats />
       </div>
 
@@ -20,7 +47,7 @@ function App() {
 
       <FilterBar />
 
-      <TaskList />
+      <TaskList tasks={tasks}/>
     </div>
   );
 }

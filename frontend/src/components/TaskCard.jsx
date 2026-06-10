@@ -1,9 +1,9 @@
-function TaskCard() {
+function TaskCard({ task }) {
   return (
     <div className="task-card">
-      <h3>Learn React</h3>
+      <h3>{task.title}</h3>
 
-      <p>Build task manager frontend</p>
+      <p>{task.description}</p>
 
       <div className="task-actions">
         <button>Edit</button>
